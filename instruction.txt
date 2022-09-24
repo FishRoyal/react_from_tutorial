@@ -1,0 +1,11 @@
+npm init
+npm install -D webpack webpack-cli
+mkdir src
+cd src
+touch index.js index.html
+cd ..
+touch webpack.config.js
+npm install -D style-loader css-loader less-loader file-loader
+npm install -D html-webpack-plugin clean-webpack-plugin
+npm install -D webpack-dev-server
+touch src/index.less
