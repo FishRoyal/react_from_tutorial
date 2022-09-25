@@ -15,4 +15,5 @@ npm install @babel/preset-env --save-dev
 npm install --save-dev @babel/preset-react
 npm install --save @babel/polyfill
 
- npm i --save react react-dom
+npm i --save react react-dom
+npm i --save redux react-redux redux-thunk

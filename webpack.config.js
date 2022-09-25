@@ -13,6 +13,7 @@ module.exports = {
         new HTMLWebpackPlugin({template: "./src/index.html"}),
         new CleanWebpackPlugin()
     ],
+    devtool: 'source-map',
     devServer: {
         port: 3000
     },
