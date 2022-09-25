@@ -2,24 +2,23 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRepos } from "../actions/repos";
 import "./main.less"
-import Repo from "./repo/Repo.jsx";
+import Repos from "./repos/Repos.jsx";
+import Loader from "./loader/Loader.jsx"
 
 const Main = () => {
     const dispatch = useDispatch();
-    const repos = useSelector(state => state.repos.items);
+    const reposObj = useSelector(state => state.repos);
+    const isLoaded = reposObj.status == "resolved";
     useEffect(() => {
-        dispatch(getRepos());
-    }, [])
+        dispatch(getRepos({currentPage: reposObj.currentPage, perPage: reposObj.perPage}));
+    }, [reposObj.currentPage])
     return (
         <div>
             <h1>Репозитории</h1>
-            <div className="container">
-            {
-                repos.length === 0 ? "" :
-                    repos.items.map(repo => 
-                        <Repo repo={repo}/>
-                    )
-            }
+            <div>
+                {
+                    isLoaded ? <Repos repos={reposObj}/> : <Loader/>
+                }
             </div>
         </div>
     )

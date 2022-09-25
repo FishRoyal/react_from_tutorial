@@ -6,26 +6,30 @@ const todoSlice = createSlice({
     initialState: {
         items: [],
         status: null,
-        error: null
+        error: null,
+        currentPage: 1,
+        perPage: 20,
+        totalCount: 0
     },
     reducers: {
-        setRepos(state, action) {
-            state.items = action.payload.repos
+        setPage(state, action) {
+            state.currentPage = action.payload;
         }
     },
     extraReducers: {
-        [getRepos.pending]: (state, action) => {
+        [getRepos.pending]: (state) => {
             state.status = "loading";
             state.error = null
         },
         [getRepos.fulfilled]: (state, action) => {
             state.status = "resolved";
-            state.items = action.payload
+            state.items = action.payload.items;
+            state.totalCount = action.payload.total_count
         },
         [getRepos.rejected]: (state, action) => {}
     }
 })
 
-export const {setRepos} = todoSlice.actions;
+export const {setPage} = todoSlice.actions;
 
 export default todoSlice.reducer;
